@@ -56,7 +56,9 @@ My {crop} is {age_days} days old. I see {symptoms}. Soil is {soil_moisture}. Wha
 
 ## Tool Use
 Sample tool use case-
-`
+Sample tool use case:
+
+```json
 {
   "tool_calls": [
     {
@@ -64,7 +66,10 @@ Sample tool use case-
       "arguments": {
         "crop": "tomato",
         "age_days": 35,
-        "symptoms": ["leaf curling", "white insects under leaves"],
+        "symptoms": [
+          "leaf curling",
+          "white insects under leaves"
+        ],
         "soil_moisture": "dry",
         "weather": "hot and dry"
       }
@@ -80,7 +85,10 @@ Sample tool use case-
       "tool": "symptom_matcher",
       "arguments": {
         "crop": "tomato",
-        "symptoms": ["leaf curling", "white insects under leaves"]
+        "symptoms": [
+          "leaf curling",
+          "white insects under leaves"
+        ]
       }
     },
     {
@@ -100,7 +108,8 @@ Sample tool use case-
     }
   ]
 }
-`
+```
+
 ## Rule - based answering
 Rules can be set up for like involvment of pesticide / if anything missing from the question ( ie crop , symptoms [for symptoms we can add like if the farmer does not understand ]).
 
