@@ -28,7 +28,24 @@ Our model does not need to know much about agriculture but it should just know t
 *   **`symptom_matcher`**: Maps physical crop symptoms to likely diseases, nutrient deficiencies, or environmental stresses.
 *   **`safe_action_checker`**: Acts as a guardrail to block and prevent dangerous or unapproved pesticide and fertilizer recommendations.
 
-We have a good dataset for crops/disease/rainfall for India . What we lack is for farmers Nat. style lang ques which we need to curate . 
+## Pipeline
+```mermaid
+graph TD
+    A([Public Datasets / Rules]) --> B[Create Structured Farm Cases]
+    B --> C[Generate Farmer-Style Questions]
+    C --> D[Generate Tool Calls from Templates]
+    D --> E[Generate Safe Final Answers from Rules]
+    E --> F{Filter Unsafe / Contradictory Samples}
+    F -- Valid Samples --> G[Fine-tune Qwen Model]
+    G --> H([Test on Unseen Farmer Queries])
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style F fill:#ff9,stroke:#333,stroke-width:2px
+    style G fill:#bbf,stroke:#333,stroke-width:2px
+    style H fill:#bfb,stroke:#333,stroke-width:2px
+```
+
+We have a good dataset for crops/disease/rainfall for India . What we lack is for farmers Nat. style lang ques which we need to curate , same applied for Tool use trajectory and rules.
 
 ## Structured farm cases 
 Sample case - 
@@ -115,6 +132,8 @@ Rules can be set up for like involvment of pesticide / if anything missing from 
 
 Missing info - If user asks something which does not include crop / crop age / weather etc. , follow up question from the chatbot can be 
 `Which crop is this, how many days old is it?`
+
+
 
 
 
