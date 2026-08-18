@@ -23,23 +23,23 @@ Can construct a decision tree to expand search space and increase possibility of
 
 
 Raw domain data / public datasets / APIs
-↓
+
 1. Tool Schema Bank
-↓
+
 2. Synthetic Instruction Generation
-↓
+
 3. Tool-Use Trajectory Generation
-↓
+
 4. Tool Execution + Result Collection
-↓
+
 5. Filtering / Verification
-↓
+
 6. SFT on Qwen3-1.7B
-↓
+
 7. Failure Mining
-↓
+
 8. Preference Dataset
-↓
+
 9. DPO / Optional RL
-↓
+
 10. Final Evaluation
