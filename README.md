@@ -11,19 +11,19 @@ Main issue - Dataset avail , but all scattered . Need to combine all of that dat
 | Pest/disease field data          | more realistic disease/pest examples            | [CCMT crop pest and disease dataset paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC10285554/)                                                                 |
 We can build for some specific types of crops initially . Eg- Wheat ,Rice,Tomato . Why these ? These crops cover very different behaviour .
 
-| Wheat | Staple crops and needs stage based irrigation and fert.
-| Rice | heavily dependent on water / rain
-| Tomato | disease/pest-heavy crop, good for symptom matching
+| Crop | Agricultural Profile | Focus Area for Agent |
+| :--- | :--- | :--- |
+| **Wheat** | Staple crop | Stage-based irrigation and fertilization workflows |
+| **Rice** | Water-intensive crop | Heavy dependency tracking on rain and water levels |
+| **Tomato** | High-maintenance crop | Disease and pest-heavy tracking for symptom matching |
 
 Our model does not need to know much about agriculture but it should just know tool calling , tool combining , safe answering etc.
 
-TOOLS = {
-    "extract_farm_context": "Extract crop, age, location, symptoms, soil, weather",
-    "crop_stage_tool": "Find crop growth stage from days after sowing",
-    "weather_risk_tool": "Detect drought, heavy rain, heat, humidity risk",
-    "soil_suitability_tool": "Check NPK, pH, moisture suitability",
-    "symptom_matcher": "Match symptoms to likely disease/nutrient/stress issue",
-    "safe_action_checker": "Prevent unsafe pesticide/fertilizer advice"
-}
+*   **`extract_farm_context`**: Parses raw inputs to extract crop type, plant age, location, reported symptoms, soil metrics, and local weather.
+*   **`crop_stage_tool`**: Calculates the exact crop growth stage based on days elapsed after sowing.
+*   **`weather_risk_tool`**: Detects environmental stress factors like drought, heavy rain, heat waves, or high humidity.
+*   **`soil_suitability_tool`**: Evaluates NPK levels, soil pH, and moisture suitability for the specific crop.
+*   **`symptom_matcher`**: Maps physical crop symptoms to likely diseases, nutrient deficiencies, or environmental stresses.
+*   **`safe_action_checker`**: Acts as a guardrail to block and prevent dangerous or unapproved pesticide and fertilizer recommendations.
 
 
