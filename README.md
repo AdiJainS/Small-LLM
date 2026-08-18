@@ -32,7 +32,7 @@ We have a good dataset for crops/disease/rainfall for India . What we lack is fo
 
 ## Structured farm cases 
 Sample case - 
-` 
+```
 {
   "crop": "tomato",
   "age_days": 35,
@@ -50,7 +50,7 @@ Sample case -
   "likely_issue": "whitefly stress",
   "safe_action": "inspect underside of leaves, avoid overwatering, consult local expert before pesticide"
 }
-`
+```
 ## Cases to questions 
 My {crop} is {age_days} days old. I see {symptoms}. Soil is {soil_moisture}. What should I do?
 
