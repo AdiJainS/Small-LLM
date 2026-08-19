@@ -102,8 +102,88 @@ On the basis of these , we can give scores , maybe derive a formal for scores
 ### Domain ground
 RAFT style  - AFT’s useful idea: train the model in an “open-book” setting with relevant documents and distractors, so it learns to use correct evidence and ignore noise.
 
-### SFT 
-We may even not require it accn to a paper
+### SFT (VERY IMP) 
+Accn to a paper Nemotron research N1.
+
+If the paper like arch followed, then - 
+Tool definitions + tool-calling tasks
+              ↓
+        Qwen generates
+        reasoning + call
+              ↓
+        execute/check call
+              ↓
+         binary reward
+              ↓
+             GRPO
+              ↓
+         model improves
+
+You don't have to tell the model exactly what its reasoning should be.
+Binary reward system R = 1 if format and tool call is correct , and R =0 otherwise.
+
+under their equal-data-budget setup, 100% RL slightly outperformed 100% Reason-SFT and No-Reason SFT on their tool-calling experiments.
+
+our new arch - 
+
+SFT baseline + Pure-RL experiment .
+This arch gave 70+ % accuracy on Qwen2.5 1.5B INstruct . Our qwen model is 3 1.7B , which is better. Hence we might be able to achieve that kind of accuracy.
+
+How our model learns ? If we ask a ques to model , it won't directly tell us the tool which is using for the obv reasons , accn to the paper , it would go through something like 
+```
+<think>
+.....
+</think>
+
+<tool_call>
+{
+  "tool_name": "...",
+  "parameters": {
+    "X": ".....",
+    "Y": "...",
+    "Z": ...
+  }
+}
+</tool_call>
+```
+Correct call is rewarded , wrong call is 0
+
+Reward Structure - 
+We do not need a specific reward model 
+
+Qwen generates
+       ↓
+deterministic verifier
+       ↓
+reward
+       ↓
+GRPO
+       ↓
+Qwen improves
+
+1.R_tool = 1 if correct tool
+2.R_args = 1 if arguments correct
+3.R_result = 1 if tool result is correctly used
+4.R_answer = 1 if final answer passes evaluation
+5.R_safety = 1 if safety constraints pass
+
+Both of the reward structures should be implemented and then compared !!
+
+Working of GRPO - 
+
+Suppose GRPO groups as 
+`G = {
+    y1,
+    y2,
+    y3,
+    y4,
+    y5,
+    y6,
+    y7,
+    y8
+}`
+and each of them has some arguments , the reward func will eval each of them 
+
 
 ### Failure mining 
 run model on validation - > failures coll. - > label corr traj - > add back to training set - > retrain 
