@@ -1,3 +1,9 @@
+!pip install unsloth
+!pip install --no-cache-dir -U "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
+!pip install trl peft accelerate bitsandbytes
+!pip install --upgrade unsloth unsloth_zoo
+!pip install vllm
+
 # =====================================================================
 # 0. IMPORTS
 # =====================================================================
