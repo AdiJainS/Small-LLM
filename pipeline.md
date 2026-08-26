@@ -1,43 +1,30 @@
-1. Read the dataset first , extract rows/cols/tools from dataset.
-2. Decide chat format
-3. Training format
-4. 
+Step 1 - Build the action parser. Accept TOOL_CALL, FINAL_ANSWER, and ASK_USER; reject
+malformed or mixed outputs.
 
- `  {
-  "action": "tool_call",
-  "tool_name": "lookup_order",
-  "arguments": {
-    "order_id": "12345"
-  }
-}
-`
+Step 2 - Connect the airline tool executor. Return actual structured observations and structured
+errors.
 
-`
-For final answer:
-{
-  "action": "final_answer",
-  "content": "Your order has been cancelled and the refund has been initiated."
-}
-`
+Step 3 - Implement the multi-turn rollout loop. Generate one action, execute one tool, append its
+observation, and continue.
 
-5.Initially convert 500 examples.
-6.Tiny SFT smoke test - just to check correct working of data format tokenizers etc..
+Step 4 - Implement the deterministic verifier. Check tool identity, all parameter values, confirmation,
+policy, facts, and final reservation state.
 
-As later on RL can be tougher to debug , we may not even know the issues GRPO faced .
-(Baseline trn)
+Step 5 - Write ten hand-checked airline tasks: lookup, direct-flight search, one-stop search, baggage
+update, passenger update, cancellation, confirmation refusal, error recovery, policy answer, and
+no-tool answer.
 
-7.Tau bench eval 
+Step 6 - Run the untrained Qwen3-1.7B baseline. Record complete success, argument accuracy,
+no-tool accuracy, policy pass rate, recovery rate, and calls per task.
 
-8.Full SFT On APIGen-MT-5k
+Step 7 - Run a tiny GRPO smoke test on one read-only tool and one write tool before adding every
+airline tool.
 
-9.Eval
+Step 8 - Add multi-step reservation tasks: identify user -> inspect reservation -> search or update ->
+verify result -> final response.
 
-10.Failure mining
+Step 9 - Run binary versus decomposed reward ablations.
 
-11.Make corrected examples from failures and retrain
+Step 10 - Add Fission-style recovery examples from on-policy errors.
 
-12.GRPO
-
-13.Fin
-
-
+Step 11 - Scale the best 1.7B recipe to Qwen3-4B.
