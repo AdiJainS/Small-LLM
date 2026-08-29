@@ -108,14 +108,6 @@ These components can be used for internal airline evaluation, but they cannot pr
 
 ## Required Comparison Table
 
-```text
-| Model | Custom Airline Pass^1 | Official τ² Airline Pass^1 | BFCL Overall |
-|---|---:|---:|---:|
-| Qwen3-1.7B Base | | | 28.41% reference |
-| Qwen3-1.7B SFT | | | |
-| Qwen3-1.7B GRPO | | | |
-```
-
 For every external result, we will record:
 
 - Benchmark version
