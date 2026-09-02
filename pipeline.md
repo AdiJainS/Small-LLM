@@ -1,6 +1,6 @@
 Use When2Call’s four decision labels, but add the candidate set, BM25 execution, retrieved evidence, and final task outcome required by your project.
 
-'''
+```
 
 {
   "task_id": "train_0001",
@@ -35,7 +35,7 @@ Use When2Call’s four decision labels, but add the candidate set, BM25 executio
   "task_success": true
 }
 
-'''
+```
 
 When2Call categories - 
 direct
