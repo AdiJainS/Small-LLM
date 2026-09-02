@@ -1,30 +1,45 @@
-Step 1 - Build the action parser. Accept TOOL_CALL, FINAL_ANSWER, and ASK_USER; reject
-malformed or mixed outputs.
+Use When2Call’s four decision labels, but add the candidate set, BM25 execution, retrieved evidence, and final task outcome required by your project.
 
-Step 2 - Connect the airline tool executor. Return actual structured observations and structured
-errors.
+'''
 
-Step 3 - Implement the multi-turn rollout loop. Generate one action, execute one tool, append its
-observation, and continue.
+{
+  "task_id": "train_0001",
+  "candidate_ids": ["doc_1", "doc_2", "doc_3"],
+  "candidates": [
+    {"id": "doc_1", "text": "..." },
+    {"id": "doc_2", "text": "..." },
+    {"id": "doc_3", "text": "..." }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Which document explains the refund policy?"
+    },
+    {
+      "role": "assistant",
+      "content": "{\"action\":\"tool_call\",\"tool_name\":\"bm25_retrieve\",\"arguments\":{\"query\":\"refund policy\",\"candidate_ids\":[\"doc_1\",\"doc_2\",\"doc_3\"],\"top_k\":2}}"
+    },
+    {
+      "role": "tool",
+      "name": "bm25_retrieve",
+      "content": "{\"results\":[{\"candidate_id\":\"doc_2\",\"text\":\"...\"}]}"
+    },
+    {
+      "role": "assistant",
+      "content": "{\"action\":\"final_answer\",\"content\":\"The refund policy is described in document doc_2.\"}"
+    }
+  ],
+  "expected_decision": "tool_call",
+  "gold_candidate_ids": ["doc_2"],
+  "acceptable_answers": ["doc_2"],
+  "task_success": true
+}
 
-Step 4 - Implement the deterministic verifier. Check tool identity, all parameter values, confirmation,
-policy, facts, and final reservation state.
+'''
 
-Step 5 - Write ten hand-checked airline tasks: lookup, direct-flight search, one-stop search, baggage
-update, passenger update, cancellation, confirmation refusal, error recovery, policy answer, and
-no-tool answer.
+When2Call categories - 
+direct
+tool_call
+request_for_info
+cannot_answer
 
-Step 6 - Run the untrained Qwen3-1.7B baseline. Record complete success, argument accuracy,
-no-tool accuracy, policy pass rate, recovery rate, and calls per task.
-
-Step 7 - Run a tiny GRPO smoke test on one read-only tool and one write tool before adding every
-airline tool.
-
-Step 8 - Add multi-step reservation tasks: identify user -> inspect reservation -> search or update ->
-verify result -> final response.
-
-Step 9 - Run binary versus decomposed reward ablations.
-
-Step 10 - Add Fission-style recovery examples from on-policy errors.
-
-Step 11 - Scale the best 1.7B recipe to Qwen3-4B.
