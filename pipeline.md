@@ -37,9 +37,48 @@ Use When2Call’s four decision labels, but add the candidate set, BM25 executio
 
 ```
 
-When2Call categories - 
+### When2Call categories - 
+
 direct
+
 tool_call
+
 request_for_info
+
 cannot_answer
+
+## System Arch.
+
+Task + allowed candidate IDs
+
+          ↓
+      Qwen model
+      
+          ↓
+          
+ direct / retrieve / ask / cannot-answer
+ 
+          ↓
+    BM25 tool execution
+    
+          ↓
+          
+ ranked evidence returned to model
+ 
+          ↓
+          
+   next retrieval or final answer
+   
+          ↓
+          
+ deterministic task scorer
+ 
+          ↓
+          
+ failure mining + rejection pairs
+
+ ## Roadmap
+
+ 
+
 
